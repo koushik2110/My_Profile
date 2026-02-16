@@ -29,6 +29,15 @@ html, body, [class*="css"]  {
   background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
 }
 
+section[data-testid="stSidebar"] {
+  background: var(--card);
+  border-right: 1px solid var(--border);
+}
+
+section[data-testid="stSidebar"] * {
+  color: var(--ink);
+}
+
 .section {
   background: var(--card);
   border: 1px solid var(--border);
