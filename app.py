@@ -39,18 +39,18 @@ section[data-testid="stSidebar"] * {
 }
 
 section[data-testid="stSidebar"] [role="switch"] {
-  background-color: #d1d1d1 !important;
-  border: 1px solid #b8b8b8 !important;
+  background-color: #bfbfbf !important;
+  border: 1px solid #a6a6a6 !important;
 }
 
 section[data-testid="stSidebar"] [role="switch"]:hover {
-  background-color: #9e9e9e !important;
-  border-color: #868686 !important;
+  background-color: #9a9a9a !important;
+  border-color: #7f7f7f !important;
 }
 
 section[data-testid="stSidebar"] [role="switch"][aria-checked="true"] {
-  background-color: var(--accent) !important;
-  border-color: var(--accent) !important;
+  background-color: #b3b3b3 !important;
+  border-color: #9c9c9c !important;
 }
 
 section[data-testid="stSidebar"] [role="switch"] > div {
