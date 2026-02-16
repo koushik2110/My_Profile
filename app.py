@@ -39,8 +39,8 @@ section[data-testid="stSidebar"] * {
 }
 
 section[data-testid="stSidebar"] [role="switch"] {
-  background-color: #e8d9cc !important;
-  border: 1px solid #d9c5b6 !important;
+  background-color: #caa389 !important;
+  border: 1px solid #b9896c !important;
 }
 
 section[data-testid="stSidebar"] [role="switch"][aria-checked="true"] {
