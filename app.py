@@ -474,6 +474,80 @@ h1, h2, h3, h4, h5, h6, p, li {
 .link a {
   color: var(--accent);
 }
+div[data-testid="stPopoverBody"] {
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+
+.chat-popover-header {
+  color: var(--ink);
+}
+
+.chat-popover-subtitle {
+  color: var(--muted);
+}
+
+.chat-popover-body {
+  background: transparent;
+}
+
+.chat-assistant {
+  background: #1f2328;
+  border: 1px solid var(--border);
+  color: var(--ink);
+}
+
+.chat-user {
+  background: #2f3a44;
+  color: var(--ink);
+}
+
+div[data-testid="stPopoverContent"] input[type="text"],
+div[data-testid="stPopoverBody"] input[type="text"] {
+  background: #1b1f24;
+  color: var(--ink);
+  border: 1px solid var(--border);
+}
+
+div[data-testid="stPopoverContent"] input[type="text"]::placeholder,
+div[data-testid="stPopoverBody"] input[type="text"]::placeholder {
+  color: var(--muted);
+}
+
+div[data-testid="stPopoverContent"] button[kind="secondary"],
+div[data-testid="stPopoverBody"] button[kind="secondary"] {
+  background: #232a31;
+  color: var(--ink);
+  border: 1px solid var(--border);
+}
+
+div[data-testid="stPopoverBody"] {
+  background: var(--card) !important;
+}
+
+div[data-testid="stPopoverBody"] > div {
+  background: var(--card) !important;
+}
+
+div[data-testid="stPopoverBody"] [data-testid="stForm"] {
+  background: transparent !important;
+}
+
+div[data-testid="stPopoverBody"] button {
+  background: #232a31 !important;
+  color: var(--ink) !important;
+  border: 1px solid var(--border) !important;
+}
+
+button[data-testid="stPopoverButton"] {
+  border: 1px solid #3a4048 !important;
+}
+
+button[data-testid="stPopoverButton"]::after {
+  background: #1b1f24;
+  color: var(--ink);
+  border-color: var(--border);
+}
 </style>
 """,
         unsafe_allow_html=True,
