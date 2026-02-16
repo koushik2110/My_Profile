@@ -313,11 +313,13 @@ div[data-testid="stPopoverBody"] {
   inset: auto 24px 96px auto !important;
   width: 340px;
   max-height: 520px;
+  background: var(--card) !important;
 }
 
 div[data-testid="stPopoverBody"] > div {
   margin-left: auto !important;
   transform: translate3d(0, 0, 0) !important;
+  background: var(--card) !important;
 }
 
 .chat-popover-header {
