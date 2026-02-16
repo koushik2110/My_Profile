@@ -38,6 +38,20 @@ section[data-testid="stSidebar"] * {
   color: var(--ink);
 }
 
+section[data-testid="stSidebar"] [role="switch"] {
+  background-color: #e8d9cc !important;
+  border: 1px solid #d9c5b6 !important;
+}
+
+section[data-testid="stSidebar"] [role="switch"][aria-checked="true"] {
+  background-color: var(--accent) !important;
+  border-color: var(--accent) !important;
+}
+
+section[data-testid="stSidebar"] [role="switch"] > div {
+  background-color: #ffffff !important;
+}
+
 .section {
   background: var(--card);
   border: 1px solid var(--border);
