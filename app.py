@@ -69,10 +69,17 @@ html, body, [class*="css"]  {
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 10px;
+  color: var(--ink);
 }
 
 .muted {
   color: var(--muted);
+}
+
+body, .stApp, .stMarkdown, .stMarkdown p, .stMarkdown li, .stMarkdown span,
+.stMarkdown div, .stText, .stCaption, .stSubheader, .stHeader, .stTitle,
+h1, h2, h3, h4, h5, h6, p, li {
+  color: var(--ink);
 }
 
 .card-title {
@@ -184,6 +191,18 @@ li {
 .project-title {
   font-weight: 700;
   font-size: 16px;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .divider {
@@ -466,25 +485,24 @@ st.markdown(
 )
 
 
-st.markdown('<div class="section"><div class="section-title">Key Projects</div>', unsafe_allow_html=True)
-proj_cols = st.columns(2, gap="large")
-with proj_cols[0]:
-    st.markdown(
-        f"""
-<div class="project-title">GenAI-Based OCI Log Analysis and Recommendation System</div>
-{bullet_list(project_oci_bullets)}
+st.markdown(
+    f"""
+<div class="section">
+  <div class="section-title">Key Projects</div>
+  <div class="projects-grid">
+    <div>
+      <div class="project-title">GenAI-Based OCI Log Analysis and Recommendation System</div>
+      {bullet_list(project_oci_bullets)}
+    </div>
+    <div>
+      <div class="project-title">GenAI-Based SAP BPMN Documentation System</div>
+      {bullet_list(project_bpmn_bullets)}
+    </div>
+  </div>
+</div>
 """,
-        unsafe_allow_html=True,
-    )
-with proj_cols[1]:
-    st.markdown(
-        f"""
-<div class="project-title">GenAI-Based SAP BPMN Documentation System</div>
-{bullet_list(project_bpmn_bullets)}
-""",
-        unsafe_allow_html=True,
-    )
-st.markdown("</div>", unsafe_allow_html=True)
+    unsafe_allow_html=True,
+)
 
 
 st.markdown(
