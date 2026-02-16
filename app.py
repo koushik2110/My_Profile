@@ -1,6 +1,30 @@
+import base64
+import html
+from pathlib import Path
 import streamlit as st
 
 st.set_page_config(page_title="Koushik M S | GenAI Backend Developer", layout="wide")
+
+DEFAULT_BOT_SVG = (
+    "data:image/svg+xml;base64,"
+    "PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA2"
+    "NCA2NCcgZmlsbD0nbm9uZScgc3Ryb2tlPSd3aGl0ZScgc3Ryb2tlLXdpZHRoPSc0JyBzdH"
+    "Jva2UtbGluZWNhcD0ncm91bmQnIHN0cm9rZS1saW5lam9pbj0ncm91bmQnPgo8cmVjdCB4"
+    "PScxMicgeT0nMTYnIHdpZHRoPSc0MCcgaGVpZ2h0PSczMicgcng9JzgnLz4KPGNpcmNsZS"
+    "BjeD0nMjYnIGN5PSczMicgcj0nMycgZmlsbD0nd2hpdGUnIHN0cm9rZT0nd2hpdGUnLz4K"
+    "PGNpcmNsZSBjeD0nMzgnIGN5PSczMicgcj0nMycgZmlsbD0nd2hpdGUnIHN0cm9rZT0nd2hp"
+    "dGUnLz4KPHBhdGggZD0nTTI0IDQwaDE2Jy8+CjxwYXRoIGQ9J00zMiAxMHY2Jy8+CjxjaX"
+    "JjbGUgY3g9JzMyJyBjeT0nMTAnIHI9JzMnIGZpbGw9J3doaXRlJyBzdHJva2U9J3doaXRl"
+    "Jy8+Cjwvc3ZnPg=="
+)
+
+bot_image_path = Path(__file__).parent / "bot.png"
+if bot_image_path.exists():
+    bot_data_uri = "data:image/jpeg;base64," + base64.b64encode(
+        bot_image_path.read_bytes()
+    ).decode("ascii")
+else:
+    bot_data_uri = DEFAULT_BOT_SVG
 
 st.markdown(
     """
@@ -217,6 +241,149 @@ li {
   height: 16px;
 }
 
+button[data-testid="stPopoverButton"] {
+  position: fixed !important;
+  right: 24px !important;
+  bottom: 24px !important;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #ffffff !important;
+  color: #ffffff !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+  font-size: 0;
+  padding: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 72%;
+}
+
+button[data-testid="stPopoverButton"]:hover {
+  filter: brightness(0.92);
+}
+
+button[data-testid="stPopoverButton"]::after {
+  content: "Hi, I am Koushik M S's assistant";
+  position: absolute;
+  right: 62px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--card);
+  color: var(--ink);
+  border: 1px solid var(--border);
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  white-space: nowrap;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+button[data-testid="stPopoverButton"]:hover::after {
+  opacity: 1;
+  transform: translateY(-50%) translateX(-4px);
+}
+
+button[data-testid="stPopoverButton"] svg {
+  display: none;
+}
+
+button[data-testid="stPopoverButton"] span,
+button[data-testid="stPopoverButton"] p,
+button[data-testid="stPopoverButton"] div {
+  display: none;
+}
+
+div[data-testid="stPopoverBody"] {
+  position: fixed !important;
+  right: 24px !important;
+  bottom: 96px !important;
+  left: auto !important;
+  top: auto !important;
+  margin-left: auto !important;
+  margin-right: 0 !important;
+  transform: translate3d(0, 0, 0) !important;
+  inset: auto 24px 96px auto !important;
+  width: 340px;
+  max-height: 520px;
+}
+
+div[data-testid="stPopoverBody"] > div {
+  margin-left: auto !important;
+  transform: translate3d(0, 0, 0) !important;
+}
+
+.chat-popover-header {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.chat-popover-subtitle {
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.chat-popover-body {
+  max-height: 240px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.chat-bubble {
+  padding: 8px 12px;
+  border-radius: 12px;
+  margin: 8px 0;
+  font-size: 13px;
+  line-height: 1.35;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.chat-assistant {
+  background: #f4efe7;
+  border: 1px solid var(--border);
+}
+
+.chat-user {
+  background: var(--accent);
+  color: #ffffff;
+  margin-left: auto;
+}
+
+@media (max-width: 640px) {
+  button[data-testid="stPopoverButton"] {
+    right: 16px !important;
+    bottom: 16px !important;
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+  }
+  button[data-testid="stPopoverButton"]::after {
+    right: 56px;
+  }
+  button[data-testid="stPopoverButton"] svg {
+    width: 22px;
+    height: 22px;
+  }
+  div[data-testid="stPopoverBody"] {
+    right: 16px !important;
+    bottom: 80px !important;
+    left: auto !important;
+    top: auto !important;
+    inset: auto 16px 80px auto !important;
+    width: 90vw;
+    max-height: 60vh;
+  }
+}
+
 .project-title {
   font-weight: 700;
   font-size: 16px;
@@ -240,6 +407,17 @@ li {
   margin: 14px 0;
 }
 
+</style>
+""",
+    unsafe_allow_html=True,
+)
+
+st.markdown(
+    f"""
+<style>
+button[data-testid="stPopoverButton"] {{
+  background-image: url("{bot_data_uri}") !important;
+}}
 </style>
 """,
     unsafe_allow_html=True,
@@ -301,6 +479,8 @@ h1, h2, h3, h4, h5, h6, p, li {
         unsafe_allow_html=True,
     )
 
+st.markdown('<div id="chat-popover-anchor"></div>', unsafe_allow_html=True)
+
 
 def bullet_list(items: list[str]) -> str:
     return "<ul>" + "".join([f"<li>{item}</li>" for item in items]) + "</ul>"
@@ -317,6 +497,66 @@ def metric_card(value: str, label: str) -> str:
         f"<div class='metric-label'>{label}</div>"
         "</div>"
     )
+
+
+def answer_question(query: str) -> str:
+    q = query.lower()
+    if "oci" in q or "log" in q:
+        return (
+            "OCI Log Analysis: Built an end-to-end RAG pipeline with LangChain and Milvus, "
+            "automated 7-day log ingestion with preprocessing and chunking, and enabled "
+            "semantic search plus GPT-driven root cause analysis and remediation."
+        )
+    if "bpmn" in q or "sap" in q:
+        return (
+            "SAP BPMN: Built an XML ingestion and structured chunking pipeline, added query-based "
+            "analysis for accurate insights, and automated standardized documentation with Python docx."
+        )
+    if "project" in q:
+        return (
+            "Key projects include OCI Log Analysis (RAG pipeline, Milvus, GPT-driven analysis) and "
+            "SAP BPMN Documentation (XML preprocessing, chunking, automated doc generation)."
+        )
+    if "experience" in q or "ibm" in q or "work" in q or "role" in q:
+        return (
+            "IBM GenAI Backend Developer (Sep 2022 - Current). Highlights: 40%+ DB cost reduction, "
+            "API response time improved from 2s to 250ms, 10-20% Cosmos DB RU reduction, and "
+            "30-40 minutes saved per customer onboarding."
+        )
+    if "skill" in q or "tech" in q or "stack" in q:
+        return (
+            "Core backend: Python, JavaScript, Java, FastAPI, Node.js, Express.js, Microservices, REST API. "
+            "GenAI/ML: RAG, LangChain, Prompt Engineering, Fine-Tuning, TensorFlow, Keras, Scikit-learn. "
+            "Cloud/DevOps: AWS, Azure, Docker, K8s, AKS, API Management."
+        )
+    if "education" in q or "degree" in q or "college" in q or "university" in q:
+        return (
+            "B.E. in Electronics and Communication, Anna University - Madras Institute of Technology. "
+            "CGPA: 8.03 / 10."
+        )
+    if "cert" in q or "award" in q or "certification" in q:
+        return (
+            "Awards and certifications include IBM Generative AI Foundations, Microsoft Certified: "
+            "Azure AI Fundamentals, and a $500 client delight award."
+        )
+    if "contact" in q or "email" in q or "phone" in q:
+        return (
+            "Email: koushikms21102000@gmail.com. Phone: +91 9514148569. "
+            "Links: Portfolio, GitHub, GeeksforGeeks."
+        )
+    return (
+        "I can answer questions about experience, projects, skills, education, and certifications. "
+        "Try asking about OCI logs, SAP BPMN, or technical skills."
+    )
+
+
+def render_chat_messages(messages: list[dict[str, str]]) -> str:
+    lines: list[str] = []
+    for msg in messages:
+        role_class = "chat-user" if msg["role"] == "user" else "chat-assistant"
+        content = html.escape(msg["content"])
+        lines.append(f'<div class="chat-bubble {role_class}">{content}</div>')
+    return "\n".join(lines)
 
 
 summary = (
@@ -590,6 +830,42 @@ st.markdown(
 """,
     unsafe_allow_html=True,
 )
+
+if "chat_messages" not in st.session_state:
+    st.session_state.chat_messages = [
+        {
+            "role": "assistant",
+            "content": "Hi, I am Koushik's assistant. Ask me about projects, skills, or experience.",
+        }
+    ]
+
+with st.popover("Chat"):
+    st.markdown('<div class="chat-popover-header">Chat Assistant</div>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="chat-popover-subtitle">Ask about experience, projects, skills, education, or certifications.</div>',
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        f'<div class="chat-popover-body">{render_chat_messages(st.session_state.chat_messages)}</div>',
+        unsafe_allow_html=True,
+    )
+    with st.form("chat_form", clear_on_submit=True):
+        col_input, col_send = st.columns([5, 2])
+        user_prompt = col_input.text_input(
+            "Ask a question",
+            label_visibility="collapsed",
+            placeholder="Type a message...",
+        )
+        submitted = col_send.form_submit_button("Send", use_container_width=True)
+
+    if submitted and user_prompt.strip():
+        st.session_state.chat_messages.append(
+            {"role": "user", "content": user_prompt.strip()}
+        )
+        st.session_state.chat_messages.append(
+            {"role": "assistant", "content": answer_question(user_prompt)}
+        )
+        st.rerun()
 
 st.markdown(
     """
