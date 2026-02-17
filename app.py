@@ -561,14 +561,14 @@ div[data-testid="stPopoverBody"] {
 
 div[data-testid="stPopoverContent"] input[type="text"],
 div[data-testid="stPopoverBody"] input[type="text"] {
-  background: #1b1f24;
-  color: var(--ink);
-  border: 1px solid var(--border);
+  background: #1b1f24 !important;
+  color: var(--ink) !important;
+  border: 1px solid var(--border) !important;
 }
 
 div[data-testid="stPopoverContent"] input[type="text"]::placeholder,
 div[data-testid="stPopoverBody"] input[type="text"]::placeholder {
-  color: var(--muted);
+  color: var(--muted) !important;
 }
 
 div[data-testid="stPopoverContent"] button[kind="secondary"],
