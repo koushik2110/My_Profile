@@ -2,6 +2,7 @@ import base64
 import html
 from pathlib import Path
 import streamlit as st
+import streamlit.components.v1 as components
 
 st.set_page_config(page_title="Koushik M S | GenAI Backend Developer", layout="wide")
 
@@ -25,6 +26,25 @@ if bot_image_path.exists():
     ).decode("ascii")
 else:
     bot_data_uri = DEFAULT_BOT_SVG
+
+RESUME_CANDIDATES = [
+    Path(__file__).parent / "KoushikMS_GenAI_Backend_Developer_Resume.pdf",
+]
+
+
+def load_resume_file() -> tuple[bytes | None, str | None]:
+    for candidate in RESUME_CANDIDATES:
+        if candidate.exists():
+            return candidate.read_bytes(), candidate.name
+    return None, None
+
+
+resume_bytes, resume_name = load_resume_file()
+resume_data_uri = None
+if resume_bytes and resume_name:
+    resume_data_uri = "data:application/pdf;base64," + base64.b64encode(
+        resume_bytes
+    ).decode("ascii")
 
 st.markdown(
     """
@@ -241,6 +261,55 @@ li {
   height: 16px;
 }
 
+.download-fab {
+  position: fixed;
+  left: calc(24px + var(--sidebar-offset, 0px));
+  bottom: 24px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA2NCA2NCcgZmlsbD0nbm9uZScgc3Ryb2tlPScjMWYxYTE3JyBzdHJva2Utd2lkdGg9JzQnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+CjxwYXRoIGQ9J00zMiAxMnYyOCcvPgo8cGF0aCBkPSdNMjIgMzBsMTAgMTAgMTAtMTAnLz4KPHJlY3QgeD0nMTQnIHk9JzQ0JyB3aWR0aD0nMzYnIGhlaWdodD0nOCcgcng9JzMnLz4KPC9zdmc+");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 55%;
+}
+
+.download-fab:hover {
+  filter: brightness(0.96);
+}
+
+.download-fab::after {
+  content: "Download Resume";
+  position: absolute;
+  left: 70px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--card);
+  color: var(--ink);
+  border: 1px solid var(--border);
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  white-space: nowrap;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.download-fab:hover::after {
+  opacity: 1;
+  transform: translateY(-50%) translateX(4px);
+}
+
 button[data-testid="stPopoverButton"] {
   position: fixed !important;
   right: 24px !important;
@@ -433,6 +502,15 @@ div[data-testid="stPopoverContent"] button[kind="primary"] {
     width: 90vw;
     max-height: 60vh;
   }
+  .download-fab {
+    left: calc(16px + var(--sidebar-offset, 0px));
+    bottom: 16px;
+    width: 48px;
+    height: 48px;
+  }
+  .download-fab::after {
+    left: 56px;
+  }
 }
 
 .project-title {
@@ -472,6 +550,40 @@ button[data-testid="stPopoverButton"] {{
 </style>
 """,
     unsafe_allow_html=True,
+)
+
+if resume_data_uri and resume_name:
+    st.markdown(
+        f'<a class="download-fab" href="{resume_data_uri}" download="{resume_name}" aria-label="Download Resume"></a>',
+        unsafe_allow_html=True,
+    )
+
+components.html(
+    """
+<script>
+(() => {
+  const updateOffset = () => {
+    try {
+      const doc = window.parent.document;
+      const sidebar = doc.querySelector('section[data-testid="stSidebar"]');
+      let offset = 0;
+      if (sidebar) {
+        const rect = sidebar.getBoundingClientRect();
+        const visible = rect.width > 0 && rect.right > 0;
+        offset = visible ? rect.width : 0;
+      }
+      doc.documentElement.style.setProperty('--sidebar-offset', `${offset}px`);
+    } catch (e) {}
+  };
+
+  updateOffset();
+  window.addEventListener('resize', updateOffset);
+  const observer = new MutationObserver(updateOffset);
+  observer.observe(window.parent.document.body, { attributes: true, childList: true, subtree: true });
+})();
+</script>
+""",
+    height=0,
 )
 
 st.sidebar.header("Theme")
