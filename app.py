@@ -339,6 +339,41 @@ div[data-testid="stPopoverBody"] > div {
   margin-bottom: 10px;
 }
 
+.chat-popover-body,
+.chat-popover-body .chat-assistant,
+.chat-popover-body .chat-user {
+  color: var(--ink);
+}
+
+.chat-popover-body .chat-assistant {
+  background: #f4efe7;
+  border: 1px solid var(--border);
+}
+
+.chat-popover-body .chat-user {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+div[data-testid="stPopoverBody"] input[type="text"],
+div[data-testid="stPopoverContent"] input[type="text"] {
+  background: #f2f4f7;
+  color: var(--ink);
+  border: 1px solid var(--border);
+}
+
+div[data-testid="stPopoverBody"] input[type="text"]::placeholder,
+div[data-testid="stPopoverContent"] input[type="text"]::placeholder {
+  color: var(--muted);
+}
+
+div[data-testid="stPopoverBody"] button[kind="secondary"],
+div[data-testid="stPopoverContent"] button[kind="secondary"] {
+  background: #ffffff;
+  color: var(--ink);
+  border: 1px solid var(--border);
+}
+
 .chat-bubble {
   padding: 8px 12px;
   border-radius: 12px;
